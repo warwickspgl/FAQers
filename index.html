@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en"><head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hermes FAQ — Warwickshire Province</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&amp;family=Source+Sans+3:wght@300;400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  :root {
+    --navy: #1a2744;
+    --navy-mid: #243159;
+    --navy-light: #2e3f6e;
+    --gold: #c9a84c;
+    --gold-light: #e2c97e;
+    --gold-pale: #f5edda;
+    --cream: #faf8f3;
+    --text: #2c2c2c;
+    --text-muted: #6b6b6b;
+    --border: #ddd5c0;
+    --red: #8b1a1a;
+    --green: #1a5c2e;
+    --shadow: 0 4px 24px rgba(26,39,68,0.10);
+    --edit-blue: #1a4474;
+    --edit-blue-light: #e8f0fa;
+    --ver-green: #1a5c2e;
+    --ver-amber: #7a4a00;
+    --ver-grey: #4a4a4a;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body { font-family: 'Source Sans 3', sans-serif; background: var(--cream); color: var(--text); min-height: 100vh; }
+
+  /* Header */
+  header { background: var(--navy); color: white; padding: 0; position: relative; overflow: hidden; }
+  header::before {
+    content: ''; position: absolute; inset: 0;
+    background: repeating-linear-gradient(45deg, transparent, transparent 40px, rgba(201,168,76,0.04) 40px, rgba(201,168,76,0.04) 80px);
+  }
+  .header-inner { position: relative; max-width: 960px; margin: 0 auto; padding: 48px 32px 40px; display: flex; align-items: flex-end; gap: 28px; }
+  .header-emblem { width: 64px; height: 64px; border: 2px solid var(--gold); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0; font-size: 28px; color: var(--gold); }
+  .header-text h1 { font-family: 'Playfair Display', serif; font-size: 2.2rem; font-weight: 700; line-height: 1.1; color: white; }
+  .header-text p { margin-top: 6px; color: var(--gold-light); font-size: 1rem; font-weight: 300; letter-spacing: 0.03em; }
+  .header-rule { height: 3px; background: linear-gradient(90deg, var(--gold), var(--gold-light) 40%, transparent); }
+
+  /* Version banner */
+  .version-banner {
+    display: none;
+    padding: 9px 24px;
+    font-size: 0.84rem;
+    font-weight: 500;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    letter-spacing: 0.01em;
+  }
+  .version-banner.visible { display: flex; }
+  .version-banner.ver-ok      { background: #eaf4ee; color: var(--ver-green); border-bottom: 1px solid #b8dfc5; }
+  .version-banner.ver-old     { background: #fff4e0; color: var(--ver-amber); border-bottom: 1px solid #f0d090; }
+  .version-banner.ver-unknown { background: #f0f0f0; color: var(--ver-grey); border-bottom: 1px solid #d8d8d8; }
+  .version-banner .ver-icon   { font-size: 1rem; }
+
+  /* Edit mode banner */
+  .edit-banner {
+    display: none;
+    background: var(--edit-blue);
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 0.88rem;
+    letter-spacing: 0.02em;
+    gap: 16px;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .edit-banner.visible { display: flex; }
+  .edit-banner strong { color: var(--gold-light); }
+  .edit-banner-btns { display: flex; gap: 10px; align-items: center; }
+  .btn-save-download {
+    background: var(--gold); color: var(--navy); border: none; padding: 7px 18px;
+    border-radius: 5px; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem;
+    font-weight: 600; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-save-download:hover { background: var(--gold-light); }
+  .btn-lock {
+    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);
+    padding: 7px 14px; border-radius: 5px; font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-lock:hover { background: rgba(255,255,255,0.25); }
+  .btn-add-faq {
+    background: rgba(255,255,255,0.15); color: white; border: 1px solid rgba(255,255,255,0.3);
+    padding: 7px 14px; border-radius: 5px; font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.85rem; cursor: pointer; transition: background 0.2s;
+  }
+  .btn-add-faq:hover { background: rgba(255,255,255,0.25); }
+
+  /* Lock button in header */
+  .lock-btn {
+    position: absolute; top: 20px; right: 24px;
+    background: rgba(255,255,255,0.1); border: 1px solid rgba(201,168,76,0.4);
+    color: var(--gold-light); padding: 8px 14px; border-radius: 6px;
+    cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-size: 0.8rem;
+    transition: background 0.2s; display: flex; align-items: center; gap: 6px;
+    z-index: 5;
+  }
+  .lock-btn:hover { background: rgba(255,255,255,0.18); }
+
+  /* Search */
+  .search-wrap { background: var(--navy-mid); padding: 18px 32px; border-bottom: 1px solid rgba(201,168,76,0.3); }
+  .search-inner { max-width: 960px; margin: 0 auto; position: relative; }
+  .search-inner input {
+    width: 100%; padding: 12px 44px 12px 18px; border-radius: 6px;
+    border: 1px solid rgba(201,168,76,0.4); background: rgba(255,255,255,0.07);
+    color: white; font-family: 'Source Sans 3', sans-serif; font-size: 0.95rem; outline: none;
+    transition: border-color 0.2s, background 0.2s;
+  }
+  .search-inner input::placeholder { color: rgba(255,255,255,0.4); }
+  .search-inner input:focus { border-color: var(--gold); background: rgba(255,255,255,0.12); }
+  .search-inner .search-icon { position: absolute; right: 14px; top: 50%; transform: translateY(-50%); color: rgba(201,168,76,0.7); font-size: 1.1rem; pointer-events: none; }
+
+  /* Tabs */
+  .tabs-wrap { background: white; border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 10; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+  .tabs-inner { max-width: 960px; margin: 0 auto; padding: 0 32px; display: flex; gap: 0; overflow-x: auto; scrollbar-width: none; }
+  .tabs-inner::-webkit-scrollbar { display: none; }
+  .tab-btn { padding: 14px 20px; border: none; background: none; cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; font-weight: 500; color: var(--text-muted); white-space: nowrap; border-bottom: 3px solid transparent; transition: color 0.2s, border-color 0.2s; }
+  .tab-btn:hover { color: var(--navy); }
+  .tab-btn.active { color: var(--navy); border-bottom-color: var(--gold); font-weight: 600; }
+
+  /* Main */
+  main { max-width: 960px; margin: 0 auto; padding: 40px 32px 80px; }
+  .results-count { font-size: 0.85rem; color: var(--text-muted); margin-bottom: 24px; font-style: italic; }
+
+  /* Section heading */
+  .section-heading { display: flex; align-items: center; gap: 12px; margin: 40px 0 16px; }
+  .section-heading:first-of-type { margin-top: 0; }
+  .section-heading .section-icon { width: 36px; height: 36px; background: var(--navy); color: var(--gold); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 1rem; flex-shrink: 0; }
+  .section-heading h2 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--navy); font-weight: 600; }
+  .section-divider { flex: 1; height: 1px; background: var(--border); }
+
+  /* FAQ Cards */
+  .faq-card { background: white; border: 1px solid var(--border); border-radius: 8px; margin-bottom: 10px; overflow: hidden; transition: box-shadow 0.2s; position: relative; }
+  .faq-card:hover { box-shadow: var(--shadow); }
+  .faq-card.hidden { display: none; }
+
+  .faq-question { width: 100%; text-align: left; padding: 18px 20px; background: none; border: none; cursor: pointer; display: flex; align-items: flex-start; gap: 14px; font-family: 'Source Sans 3', sans-serif; }
+  .faq-q-icon { width: 22px; height: 22px; border-radius: 50%; background: var(--navy); color: var(--gold); font-size: 0.7rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-family: 'Playfair Display', serif; }
+  .faq-q-text { font-size: 0.97rem; font-weight: 600; color: var(--navy); line-height: 1.4; flex: 1; }
+  .faq-chevron { color: var(--gold); font-size: 0.8rem; transition: transform 0.25s; margin-top: 3px; flex-shrink: 0; }
+  .faq-card.open .faq-chevron { transform: rotate(180deg); }
+
+  .faq-answer { display: none; padding: 16px 20px 20px 56px; font-size: 0.93rem; line-height: 1.7; color: var(--text); border-top: 1px solid var(--gold-pale); }
+  .faq-card.open .faq-answer { display: block; }
+  .faq-answer p + p { margin-top: 10px; }
+  .faq-answer .note { background: var(--gold-pale); border-left: 3px solid var(--gold); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 12px; font-size: 0.9rem; }
+  .faq-answer .warning { background: #fdf2f2; border-left: 3px solid var(--red); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 12px; font-size: 0.9rem; color: var(--red); }
+  .faq-answer .tip { background: #f0f7f3; border-left: 3px solid var(--green); padding: 10px 14px; border-radius: 0 4px 4px 0; margin-top: 12px; font-size: 0.9rem; color: var(--green); }
+  .faq-answer strong { color: var(--navy); }
+
+  /* ===== EDIT MODE STYLES ===== */
+  body.edit-mode .faq-card { border-color: #b8ccee; }
+  body.edit-mode .faq-card:hover { box-shadow: 0 0 0 2px var(--edit-blue); }
+
+  .edit-controls {
+    display: none;
+    background: var(--edit-blue-light);
+    border-top: 1px dashed #b8ccee;
+    padding: 12px 16px;
+    gap: 10px;
+    flex-wrap: wrap;
+    align-items: flex-start;
+  }
+  body.edit-mode .faq-card.open .edit-controls { display: flex; }
+
+  .edit-field-label { font-size: 0.78rem; font-weight: 600; color: var(--edit-blue); text-transform: uppercase; letter-spacing: 0.06em; margin-bottom: 4px; }
+  .edit-field-wrap { width: 100%; }
+  .edit-q-input {
+    width: 100%; padding: 8px 12px; border: 1px solid #b8ccee; border-radius: 5px;
+    font-family: 'Source Sans 3', sans-serif; font-size: 0.93rem; font-weight: 600;
+    color: var(--navy); background: white; resize: none; outline: none;
+    transition: border-color 0.2s;
+  }
+  .edit-q-input:focus { border-color: var(--edit-blue); }
+  .edit-a-input {
+    width: 100%; padding: 8px 12px; border: 1px solid #b8ccee; border-radius: 5px;
+    font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem; color: var(--text);
+    background: white; resize: vertical; outline: none; min-height: 100px;
+    transition: border-color 0.2s; line-height: 1.6;
+  }
+  .edit-a-input:focus { border-color: var(--edit-blue); }
+  .edit-cat-select {
+    padding: 7px 10px; border: 1px solid #b8ccee; border-radius: 5px;
+    font-family: 'Source Sans 3', sans-serif; font-size: 0.85rem; background: white;
+    color: var(--text); outline: none; cursor: pointer;
+  }
+  .edit-cat-select:focus { border-color: var(--edit-blue); }
+
+  .edit-hint { font-size: 0.75rem; color: #6b8ab5; margin-top: 4px; font-style: italic; }
+
+  .btn-delete-card {
+    background: #fdf2f2; color: var(--red); border: 1px solid #e8b8b8;
+    padding: 6px 14px; border-radius: 5px; font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem; cursor: pointer; transition: background 0.2s; margin-top: 6px;
+  }
+  .btn-delete-card:hover { background: #f8dede; }
+
+  .btn-apply-edits {
+    background: var(--edit-blue); color: white; border: none;
+    padding: 6px 16px; border-radius: 5px; font-family: 'Source Sans 3', sans-serif;
+    font-size: 0.82rem; cursor: pointer; transition: background 0.2s; margin-top: 6px;
+  }
+  .btn-apply-edits:hover { background: #153660; }
+
+  /* No results */
+  .no-results { display: none; text-align: center; padding: 60px 20px; color: var(--text-muted); }
+  .no-results .nr-icon { font-size: 2.5rem; margin-bottom: 12px; }
+
+  /* Modal */
+  .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.55); z-index: 1000; align-items: center; justify-content: center; }
+  .modal-overlay.visible { display: flex; }
+  .modal-box { background: white; border-radius: 10px; padding: 36px 32px; max-width: 380px; width: 90%; box-shadow: 0 12px 48px rgba(0,0,0,0.25); }
+  .modal-box h3 { font-family: 'Playfair Display', serif; color: var(--navy); font-size: 1.3rem; margin-bottom: 8px; }
+  .modal-box p { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 20px; line-height: 1.5; }
+  .modal-input { width: 100%; padding: 11px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 0.95rem; outline: none; transition: border-color 0.2s; margin-bottom: 8px; }
+  .modal-input:focus { border-color: var(--navy); }
+  .modal-error { color: var(--red); font-size: 0.83rem; margin-bottom: 12px; display: none; }
+  .modal-btns { display: flex; gap: 10px; justify-content: flex-end; margin-top: 8px; }
+  .btn-modal-cancel { background: none; border: 1px solid var(--border); padding: 9px 18px; border-radius: 6px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem; color: var(--text-muted); }
+  .btn-modal-cancel:hover { background: var(--cream); }
+  .btn-modal-ok { background: var(--navy); color: white; border: none; padding: 9px 20px; border-radius: 6px; cursor: pointer; font-family: 'Source Sans 3', sans-serif; font-size: 0.88rem; font-weight: 600; }
+  .btn-modal-ok:hover { background: var(--navy-light); }
+
+  /* Add FAQ modal extras */
+  .modal-box.wide { max-width: 520px; }
+  .modal-field { margin-bottom: 14px; }
+  .modal-field label { display: block; font-size: 0.8rem; font-weight: 600; color: var(--navy); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 5px; }
+  .modal-textarea { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; outline: none; min-height: 90px; resize: vertical; transition: border-color 0.2s; }
+  .modal-textarea:focus { border-color: var(--navy); }
+  .modal-select { width: 100%; padding: 10px 14px; border: 1px solid var(--border); border-radius: 6px; font-family: 'Source Sans 3', sans-serif; font-size: 0.9rem; outline: none; background: white; cursor: pointer; }
+  .modal-hint { font-size: 0.75rem; color: var(--text-muted); margin-top: 4px; font-style: italic; }
+
+  /* Footer */
+  footer { background: var(--navy); color: rgba(255,255,255,0.5); text-align: center; padding: 20px; font-size: 0.8rem; }
+  footer span { color: var(--gold); }
+
+  @media (max-width: 600px) {
+    .header-inner { padding: 32px 20px 28px; flex-direction: column; align-items: flex-start; gap: 16px; }
+    main { padding: 28px 16px 60px; }
+    .search-wrap { padding: 14px 16px; }
+    .tabs-inner { padding: 0 16px; }
+    .faq-answer { padding-left: 20px; }
+    .lock-btn { top: 14px; right: 14px; }
+  }
+</style>
+</head>
+<body class="">
+
+<!-- Password Modal -->
+<div class="modal-overlay" id="passwordModal">
+  <div class="modal-box">
+    <h3>🔒 Edit Mode</h3>
+    <p>Enter the editor password to unlock editing. Changes can be saved by downloading an updated copy of this file.</p>
+    <input type="password" class="modal-input" id="passwordInput" placeholder="Password" onkeydown="if(event.key==='Enter')checkPassword()">
+    <div class="modal-error" id="passwordError" style="display: none;">Incorrect password — please try again.</div>
+    <div class="modal-btns">
+      <button class="btn-modal-cancel" onclick="closePasswordModal()">Cancel</button>
+      <button class="btn-modal-ok" onclick="checkPassword()">Unlock</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add FAQ Modal -->
+<div class="modal-overlay" id="addFaqModal">
+  <div class="modal-box wide">
+    <h3>➕ Add New FAQ</h3>
+    <p>Fill in the question and answer for the new FAQ entry.</p>
+    <div class="modal-field">
+      <label>Category</label>
+      <select class="modal-select" id="newFaqCat">
+        <option value="candidates">Candidates</option>
+        <option value="ceremonies">Ceremonies &amp; Participants</option>
+        <option value="installation">Installation</option>
+        <option value="members">Members &amp; Honorary Members</option>
+        <option value="returns">Annual Returns &amp; Billing</option>
+        <option value="meetings">Meetings &amp; Dispensations</option>
+        <option value="other">Other</option>
+      </select>
+    </div>
+    <div class="modal-field">
+      <label>Question</label>
+      <input type="text" class="modal-input" id="newFaqQ" placeholder="e.g. How do I...?" style="margin-bottom:0">
+    </div>
+    <div class="modal-field">
+      <label>Answer</label>
+      <textarea class="modal-textarea" id="newFaqA" placeholder="Plain text answer. Use a new line for each paragraph."></textarea>
+      <div class="modal-hint">Plain text only — formatting will be applied automatically.</div>
+    </div>
+    <div class="modal-field">
+      <label>Keywords (optional)</label>
+      <input type="text" class="modal-input" id="newFaqKw" placeholder="e.g. tyler ballot lodge external" style="margin-bottom:0">
+      <div class="modal-hint">Space-separated words to help search find this FAQ.</div>
+    </div>
+    <div class="modal-btns">
+      <button class="btn-modal-cancel" onclick="closeAddModal()">Cancel</button>
+      <button class="btn-modal-ok" onclick="addNewFaq()">Add FAQ</button>
+    </div>
+  </div>
+</div>
+
+<header>
+  <div class="header-inner">
+    <div class="header-emblem">⚖</div>
+    <div class="header-text">
+      <h1>Hermes FAQ</h1>
+      <p>Warwickshire Province — Secretary &amp; Scribe E Reference Guide</p>
+    </div>
+  </div>
+  <button class="lock-btn" onclick="openPasswordModal()" title="Enter edit mode">🔒 Edit</button>
+  <div class="header-rule"></div>
+</header>
+
+<div class="version-banner" id="versionBanner">
+  <span class="ver-icon"></span>
+  <span id="versionText"></span>
+</div>
+
+<div class="edit-banner" id="editBanner">
+  <span>✏️ <strong>Edit Mode Active</strong> — Click any FAQ to expand it, then edit below the answer.</span>
+  <div class="edit-banner-btns">
+    <button class="btn-add-faq" onclick="openAddModal()">➕ Add FAQ</button>
+    <button class="btn-save-download" onclick="saveAndDownload()">💾 Save &amp; Download</button>
+    <button class="btn-lock" onclick="lockEditMode()">🔒 Lock</button>
+  </div>
+</div>
+
+<div class="search-wrap">
+  <div class="search-inner">
+    <input type="text" id="searchInput" placeholder="Search FAQs e.g. 'installation return', 'Tyler', 'annual return'…" oninput="filterFAQs()">
+    <span class="search-icon">🔍</span>
+  </div>
+</div>
+
+<div class="tabs-wrap">
+  <div class="tabs-inner">
+    <button class="tab-btn active" onclick="filterTab('all', this)">All Topics</button>
+    <button class="tab-btn" onclick="filterTab('candidates', this)">Candidates</button>
+    <button class="tab-btn" onclick="filterTab('ceremonies', this)">Ceremonies</button>
+    <button class="tab-btn" onclick="filterTab('installation', this)">Installation</button>
+    <button class="tab-btn" onclick="filterTab('members', this)">Members</button>
+    <button class="tab-btn" onclick="filterTab('returns', this)">Returns</button>
+    <button class="tab-btn" onclick="filterTab('meetings', this)">Meetings</button>
+    <button class="tab-btn" onclick="filterTab('other', this)">Other</button>
+  </div>
+</div>
+
+<main>
+  <p class="results-count" id="resultsCount"></p>
+  <div id="faqContainer">
+
+    <!-- CANDIDATES -->
+    <div class="section-heading" data-cat="candidates" style="display: flex;">
+      <div class="section-icon">👤</div>
+      <h2>Candidates</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="candidates" data-keywords="proposal date candidate paper forms hermes province">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Can I edit a proposal or balloted date on a candidate's record?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>NO -  This feature was only permitted to be used when the Province was moving from paper forms to the new Hermes system— i.e. when candidates were already proposed or balloted, but the ceremony was to be done in Hermes (November/December 2024 and the following few months).<br>        Using this feature now is irregular — it raises flags and usually blocks the candidate. If you entered a date by error and need a date removed, contact the PGReg who will contact UGLE and  to request that it is unwound.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="candidates" data-keywords="candidate ballot can't add proposed approved">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">I can't add a candidate to the ballot — what should I do?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>The usual reason is that the Candidate was not placed on the agenda of the previous meting under "To Propose". Refer to the Proposed and Approved Process Notes for the full step-by-step guide. Hermes enforces the Book of Constitutions, to ensure the candidate has been correctly proposed and approved before attempting to add them to the ballot screen. <br>If there is a reason why the candidate was not Proposed on Hermes, please contact the Provincial Grand Registrar who will see if anything can be done to regularise the situation. Do not try to edit any data yourself. A candidate can only be proposed after the WM (or MEZ) has certified the form. To deliberately manipulate any dates to reflect otherwise will lead to investigation as to the motive.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="candidates" data-keywords="passing brother another lodge degree by request rule 173">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I Pass or Raise a brother from another lodge?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>If the brother for Passing or Raising is from a different lodge  in a Hermes Province: The "originating" lodge (i.e. where the candidate is a member) must send a Degree by Request to your lodge via Hermes. When accepted by the Master, the candidate will appear on your candidates list for passing with (DBR) after their name. Add that candidate under the appropriate ceremony. Once the ceremony is complete, and the Post Meeting report submitted Hermes, the brother's record will eb updated, his lodge will be informed, and he will no longer appear on your list of candidates for a degree.<br>        If the brother is  NOT from a Hermes Province: The secretary must send a written request to your Master (and secretary) under Rule 173(a). This goes on your summons but cannot go on Hermes. After the ceremony, inform the owning lodge that it has been completed.</p>
+<p>In all cases of a Raising under "Degree by Request", the Grand Lodge Certificate will be sent to the secretary of the brother's Originating lodge.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="candidates" data-keywords="fellowcraft joining master mason unattached foreign constitution degree by request">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Can an Entered Apprentice or a Fellowcraft join our lodge as a joining member?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>No. Only Master Masons can be joining members of lodges. The Secretary must see the Grand Lodge Certificate before a proposal can be made.<br>        Until a brother is Raised, he "belongs" to his Mother Lodge. That lodge can ask you to Pass or Raise him on their behalf as a Degree by Request. It is for the Mother Lodge to decide if he is ready — this cannot be demanded of them.<br>        Even if the brother has resigned from his Mother Lodge and is unattached, a Degree by Request is still required.<br>        If the candidate is from a foreign constitution lodge, the same procedure applies but with added complexity. Please refer the matter to PGReg for assistance.</p>
+<p>The only exception is where a candidate has been excluded from a lodge under R148 or R181 before becoming a Master Mason. In this situation they do not have a Grand Lodge Certificate and are not eligible to visit a lodge to have a Degree conferred on them by Request. Please contact the Provincial Grand Registrar, who will work with UGLE to obtain the permissions for the candidate to join the lodge, and so that the remaining degrees can be conferred.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="candidates" data-keywords="password resend candidate enquirer proposer seconder WM">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">A candidate (or proposer/seconder/WM) has lost or timed-out their password — how do I resend it?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>Go to <strong>Member Management</strong>, click the candidate's name, and choose <strong>"Resend Credentials"</strong> (or equivalent wording). You can resend passwords for Candidates, Enquirers, Proposers, Seconders, and the WM from this section.</p>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- CEREMONIES -->
+    <div class="section-heading" data-cat="ceremonies" style="display: flex;">
+      <div class="section-icon">📜</div>
+      <h2>Ceremonies &amp; Participants</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="ceremonies" data-keywords="ceremony participants not on hermes forgotten add">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I add ceremony participants for a ceremony on Hermes if I forgot to add them?
+ What if we did a tracing board, outside a ceremony, and want to record the participant?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Keep a note of who did what. The next time the lodge performs that ceremony, add those brethren as contributors at that time. You are allowed to record multiple people for one piece of work.<br>        The date will be recorded against the later ceremony, but their Ceremonial Record will be updated accordingly.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="ceremonies" data-keywords="multiple ceremonies recording participants obligation">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">When there are multiple candidates in a ceremony, do I record participants for each one?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Whilst the fact the Obligation was done, must be completed for each candidate - you only need to add the remaining ceremony parts and participants for one of the candidates. There is no need to do it for every candidate.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="ceremonies" data-keywords="lecture tracing board agenda hermes participant credit">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Can I add a tracing board lecture (not part of a ceremony) as an agenda item, and credit the participant?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>Tracing boards delivered outside of a ceremony are <strong>not</strong> part of the Book of Constitutions or a ceremony, and thus cannot be listed as a Hermes agenda item — nor can the participant be directly credited.</p>
+        <p>For a <strong>full tracing board</strong>, you may add it on to the participants list for the next 1st or 2nd Degree ceremony the lodge performs. The date will be wrong, but the deliverer's Ceremonial Record will be updated.</p>
+        <div class="note">The same principle applies to Royal Arch lectures, demonstrations of degrees, and working tools delivered outside of ceremony. Record them at the next appropriate ceremony and add the brother as a contributor.</div>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="ceremonies" data-keywords="grand lodge certificate presentation participant">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Who is recorded as the Ceremony Participant for a Grand Lodge Certificate presentation?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>The participant to record on Hermes is the brother <strong>presenting</strong> the certificate — <em>not</em> the brother receiving it.</p>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="ceremonies" data-keywords="agenda items hermes eulogies lectures 50 60 year certificates">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Why can't I find a drop-down item for eulogies, lectures, or 50/60-year certificates on the Hermes agenda?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>These items are not part of business governed by the Book of Constitutions and therefore have no drop-down entry in Hermes. They should of course be recorded in your minute book as is your custom.<br>        If you wish to credit a brother for delivering an item which is a usual part of a degree ceremony, add it on to the participants list at the next appropriate ceremony (initiation, passing, raising, or exaltation).</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- INSTALLATION -->
+    <div class="section-heading" data-cat="installation" style="display: flex;">
+      <div class="section-icon">🏛️</div>
+      <h2>Installation</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="election meeting 3 september regular named">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">My meeting before Installation is being labelled "Election Meeting" but it's a Regular meeting — is this right?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>At present, any meeting immediately prior to the Installation will automatically be labelled as an Election Meeting in Hermes, even if it is an additional or emergency meeting.</p>
+        <div class="note">Please ask the lodge to <strong>ignore that labelling</strong> and not add any Election Meeting agenda items to this meeting. The Installation meeting will still use the items submitted at the actual Election meeting.</div>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="installation return submit can't office not filled stewards">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">I can't submit my Installation Return — what do I do?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>The most common cause is that <strong>every office</strong> must be completed — either with the name of an Officer or with the words <strong>"Office Not Filled"</strong>, including all multiple steward lines.</p>
+        <p>If "Office Not Filled" is not in the drop-down list (it is at the very end of all members), type the words <em>Office Not Filled</em> into the text box and click the magnifying glass icon.</p>
+        <p>If the words don't "stick" and the box becomes empty on saving, try adding it in the <strong>Pre-Meeting / Pre-Installation Return</strong> section instead using the same process.</p>
+        <div class="warning">If neither approach works, submit a support request to UGLE. Be explicit about which office has the issue and what it should name (or "Office Not Filled").</div>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="working tools ceremony participants shortened full form">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Should I add ceremony participants for Working Tools at Installation?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>Only add ceremony participants for Working Tools if they are <strong>presented in full</strong>. No credit should be given for a shortened form or "bringing to attention."</p>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="guest organist installation return GL number external">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I record a Guest Organist on the Installation Return?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Guest Organist is a post (not an office) which Warwickshire chooses to record. As the brother is not a lodge member, he must be looked up from the UGLE database. Type the person's name as "SURNAME, First name" and click the magnifying glass. If it is a common name, knowing the brother's GL number will help you select the correct person.<br>        In all other cases, type "Office Not Filled" and click the magnifying glass — this will close off the post and allow you to submit the return.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="tyler installation return external not a member">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I record an external Tyler on the Installation Return?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">
+        <p>If the Tyler is not a lodge member, type their name into the box and click the magnifying glass — this will close off the post and allow you to submit the return. If it is a common name, knowing the brother's GL number will help you select the correct person.</p>
+      </div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="stewards more than installation return additional">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">We have appointed more Stewards than there are lines on the Installation Return — what do we do?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>No problem — just let PGReg know the names of the additional stewards and he will add them for you.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="master elect not present installation officers remain in post">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">No lodge officers appear to have been appointed this year — what has happened?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>If the Master-Elect is not marked as present at the Installation meeting, the installation is deemed not to have occurred and the existing Master and officers remain in post.<br>        Please contact PGReg immediately. They will arrange for that meeting to be unwound so you can correctly mark the Master-Elect as present.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="installation" data-keywords="joining member installation appointed office PMR">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">A member is joining the lodge at the Installation meeting and will be appointed to office — how do I handle this on Hermes?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>This is entirely in line with the BoC. However, as Hermes can only add a member once the Post Meeting Report is filed, it is not possible to add them to the pre-meeting Installation Return.<br>        The pragmatic approach is to appoint a "unique brother" to that office initially. After the meeting, PGReg can swap the placeholder for the joining member. Choosing a brother who is not in any other office makes it easier to identify.<br>        Please pre-warn PGReg of this situation and send the minutes of the Installation meeting afterwards for confirmation of who was appointed in reality.<br>      If you are uncomfortable with this approach, we can ask UGLE to temporarily add the member to your lodge, so they can add him to the list of officers for appointment to a role, then remove him from the lodge so that the ballot can be recorded properly. This takes about 2 hours, and wins absolutely no friends. Remember that your signed Minute Book is the definitive record of the lodge and its Regularity. The Provincial Grand Registrar is responsible for the data in the databases - and he is very happy with the shorter, pragmatic, approach.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- MEMBERS -->
+    <div class="section-heading" data-cat="members" style="display: flex;">
+      <div class="section-icon">👥</div>
+      <h2>Members &amp; Honorary Members</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="members" data-keywords="honorary member not former current lodge rule 167">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I make someone an Honorary Member if they have never been a member of our lodge?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>You are not able to add a Non-subscribing member of your lodge to Hermes, for election to Honorary Membership, as additional checks are needed not visible at your lodge level. <br>Add the item to your summons and ensure Rule 167 is correctly valid. After the ballot, let PGReg know and he will add the brother to your lodge as an honorary member.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="members" data-keywords="honorary member current member lodge ballot resign subscribing">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I make an existing lodge member an Honorary Member?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Add the item to the Pre-Meeting Agenda and ballot for him. There is no need for a Notice of Motion — just put it on the summons, issued in good time. It must be a physical ballot with a ballot box.<br>        There is no need for a member to resign before he is made an Honorary Member. By accepting Honorary Membership, he is deemed to have resigned as a subscribing member on acceptance.<br>        Be very careful that the honorary member understands: if he is not subscribing to any other lodge, he may become an "unattached member" and will only be able to visit other lodges once per lodge, ever. If he is in the Royal Arch, he will be automatically excluded from that after one year.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="members" data-keywords="initiate joining member visitor attendance stats count">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Is an Initiate or Joining Member counted as a Member or Visitor in the attendance statistics?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Please add them to the count for Visitors -as they are not a member when the meeting opens, which is when the Tyler's book is completed.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="members" data-keywords="omitted attendance list can't change">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">I omitted someone from the attendance list — can I correct this?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Unfortunately, this is not possible to change once submitted. The only exception would be if it affects a BoC item — for example, a brother who has never been a Warden not being marked as present at an Installation.<br>        In those exceptional cases only, please contact PGReg to discuss the situation.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="members" data-keywords="wm email not receiving certify candidate office email">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">The WM (or Treasurer) is not receiving emails from Hermes — why?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Check whether there is a lodge-specific email address attached to the Office of WM (or Treasurer), or whether another brother's email address has been added to this office.<br>        Hermes, Province, and UGLE send role-specific emails to the Office email address. If that is blank, they fall back to the personal address. If the WM does not have access to the office email account, they will not receive these emails.<br>        Review and update the office email address in Member Management to resolve the issue.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- RETURNS -->
+    <div class="section-heading" data-cat="returns" style="display: flex;">
+      <div class="section-icon">📋</div>
+      <h2>Annual Returns &amp; Billing</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="returns" data-keywords="annual returns UGLE province tabs approve check">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">What do I need to check on the Annual Returns?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>There is one Annual Return for UGLE and one for Province. These are found on two "tabs" next to each other. Please remember to check and approve on both tabs.<br>        A common oversight is approving only one tab. Both must be completed separately.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="returns" data-keywords="annual bill dues members resigned excluded died registration fees">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How is the annual bill calculated and who is included?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>There is now one annual bill covering dues for each member who was a member in the preceding year — even if they resigned or died during that year.<br>        The number on your Annual Return will equal: current members + resignations + exclusions + deaths.<br>        Any registration fees are also included on this single annual bill. There is no need to pay separately when each candidate is initiated during the year.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="returns" data-keywords="annual return emails secretary personal office UGLE province 4 emails">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How many Annual Return emails will I receive, and when?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>You will receive emails at both your personal email address and the secretaries office email address (if one exists) — for both UGLE and Province. That means up to 4 emails in total (2 for Province, 2 for UGLE).<br>        You will receive one set approximately one month before the year-end to prompt you to check resignations and exclusions are up to date, then another set a month later to approve the Return and send it to the Treasurer.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="returns" data-keywords="send to treasurer button not appearing year end financial">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">I can't find the "Send to Treasurer" button on either the UGLE or Provincial screen.</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>The "Send to Treasurer" button only appears the day after the end of your financial year — for example, on 1st September if your year-end is 31st August.<br>        This is because dispensations or registration fees from the final days of the year may still be added to the bill until midnight on the last day.<br>        In the meantime, use the time to check all your members are correct — update any that need excluding for unpaid subscriptions, or who have resigned.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- MEETINGS -->
+    <div class="section-heading" data-cat="meetings" style="display: flex;">
+      <div class="section-icon">📅</div>
+      <h2>Meetings &amp; Dispensations</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="meetings" data-keywords="change meeting date emergency dispensation public holiday good friday">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I change a meeting date or hold an emergency meeting? OR "My lodge is due to meet on a Bank Holiday"</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Use Dispensation under Lodge Management — for emergnecy meetings or to change the date of an exisitng meeting.<br> If the date change is permitted by the BoC (e.g. the meeting falls on a public holiday or an excluded day such as Good Friday), completing a dispensation request is the easiest way to move the date and let the Provincial Office know the new date (there is no charge).</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="meetings" data-keywords="add extra meeting royal arch principals emergency">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I add an extra meeting for Royal Arch?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Use "Add Meeting" under Lodge Management. This will be approved by PGSec. Note there is no concept of an "Emergency Meeting" in Royal Arch - no dispensation is needed — extra meetings can be called by the Principals at any time.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="meetings" data-keywords="lunar irregular lodge add meeting date last working day full moon">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">Our lodge meets on an irregular date (e.g. last working day of month) — how do we add these meetings?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Lunar or irregular lodges only may use "Add Meeting Date" from the Lodge Management screen.<br>        All other lodges must use "Move by Dispensation" or "Emergency Meeting by Dispensation." Do not use "Add Meeting Date" if your lodge has regular, fixed meeting dates - or you wish to add an Emergency meeting. It will not be approved.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <div class="faq-card" data-cat="meetings" data-keywords="election tyler BoC ballot show of hands internal brethren">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">What is the correct process for electing a Tyler?</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>The BoC requires that the Tyler must be elected, and this must appear on the summons each year.<br>        If the lodge wishes to appoint a brother from within the lodge, a Proposition duly seconded is made in open lodge: "I propose that the WM appoints the Tyler from among the brethren at the Installation." A show of hands carries this.<br>        Only external Tylers need to be put on the Election Meeting agenda on Hermes.<br>A lodge must have a named Tyler - it is one of the Required Offices. It is also the first question asked during the opening of a lodge. Lodges must be Tyled.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+    <!-- OTHER -->
+    <div class="section-heading" data-cat="other" style="display: flex;">
+      <div class="section-icon">💡</div>
+      <h2>Other Topics</h2>
+      <div class="section-divider"></div>
+    </div>
+
+    <div class="faq-card" data-cat="other" data-keywords="charity donation non registered almoners collection relief chest scout">
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">How do I record a charity donation or Almoner's collection on Hermes? or "I can't find my charity listed."</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer"><p>Recording charity donations on Hermes is optional. <br>If the donation is to your lodge relief chest, you can ignore it altogether — statistics are collected when money is disbursed from there.        For a donation to a local or unregistered charity (e.g. a Scout group), click "Charity Not Found" and enter it manually.        <br>Money for Almoners (widows' Christmas presents, flowers for the hospitalised, bereavement cards, etc.) is not charitable giving and should not be recorded here.<br>If you can't find a charity by the search box -use "charity not found" and type in the best guess. A further reminder that  recording these donations is optional and the Meeting Report can be filed without completing it.</p></div>
+      <div class="edit-controls"></div>
+    </div>
+
+  </div><!-- end faqContainer -->
+
+  <div class="no-results" id="noResults" style="display: none;">
+    <div class="nr-icon">🔍</div>
+    <p>No FAQs found matching your search.<br>Try different keywords or browse by category above.</p>
+  </div>
+</main>
+
+<footer>
+  Warwickshire Province — Hermes FAQ &nbsp;|&nbsp; <span>For Secretaries &amp; Scribes E</span>
+</footer>
+
+<script>
+  // ===== PASSWORD =====
+  // Simple hash check — not cryptographic, but stops casual access.
+  // Password is: Warwickshire2024
+  const PASS_HASH = 'a7f8c2e4b1d3f6a9c2e5b8d1f4a7c0e3b6d9f2a5c8e1b4d7f0a3c6e9b2d5f8a1';
+
+  function simpleHash(str) {
+    // FNV-1a style hash, encoded as hex-like string for comparison
+    let h = 0x811c9dc5;
+    for (let i = 0; i < str.length; i++) {
+      h ^= str.charCodeAt(i);
+      h = (h * 0x01000193) >>> 0;
+    }
+    // We'll just store it as a number string for this use
+    return h.toString(16).padStart(8, '0');
+  }
+
+  // The stored hash of "Warwickshire2024"
+  const STORED = simpleHash('Warwickshire2024');
+
+  let editMode = false;
+  let activeTab = 'all';
+
+  function openPasswordModal() {
+    if (editMode) { lockEditMode(); return; }
+    document.getElementById('passwordModal').classList.add('visible');
+    document.getElementById('passwordInput').value = '';
+    document.getElementById('passwordError').style.display = 'none';
+    setTimeout(() => document.getElementById('passwordInput').focus(), 100);
+  }
+
+  function closePasswordModal() {
+    document.getElementById('passwordModal').classList.remove('visible');
+  }
+
+  function checkPassword() {
+    const val = document.getElementById('passwordInput').value;
+    if (simpleHash(val) === STORED) {
+      closePasswordModal();
+      enterEditMode();
+    } else {
+      document.getElementById('passwordError').style.display = 'block';
+      document.getElementById('passwordInput').select();
+    }
+  }
+
+  function enterEditMode() {
+    editMode = true;
+    document.body.classList.add('edit-mode');
+    document.getElementById('editBanner').classList.add('visible');
+    document.querySelector('.lock-btn').textContent = '🔓 Editing';
+    // Build edit controls for every card
+    document.querySelectorAll('.faq-card').forEach(card => buildEditControls(card));
+  }
+
+  function lockEditMode() {
+    editMode = false;
+    document.body.classList.remove('edit-mode');
+    document.getElementById('editBanner').classList.remove('visible');
+    document.querySelector('.lock-btn').innerHTML = '🔒 Edit';
+    // Close all cards
+    document.querySelectorAll('.faq-card.open').forEach(c => c.classList.remove('open'));
+  }
+
+  // ===== EDIT CONTROLS =====
+  function buildEditControls(card) {
+    const ec = card.querySelector('.edit-controls');
+    if (!ec) return;
+    const qText = card.querySelector('.faq-q-text').textContent;
+    const answerEl = card.querySelector('.faq-answer');
+    const answerText = answerEl.innerText;
+    const cat = card.getAttribute('data-cat');
+    const kw = card.getAttribute('data-keywords') || '';
+
+    const cats = [
+      ['candidates','Candidates'],
+      ['ceremonies','Ceremonies & Participants'],
+      ['installation','Installation'],
+      ['members','Members & Honorary Members'],
+      ['returns','Annual Returns & Billing'],
+      ['meetings','Meetings & Dispensations'],
+      ['other','Other']
+    ];
+    const catOptions = cats.map(([v,l]) => `<option value="${v}"${v===cat?' selected':''}>${l}</option>`).join('');
+
+    ec.innerHTML = `
+      <div class="edit-field-wrap">
+        <div class="edit-field-label">Question</div>
+        <textarea class="edit-q-input" rows="2">${escHtml(qText)}</textarea>
+      </div>
+      <div class="edit-field-wrap">
+        <div class="edit-field-label">Answer (plain text — one paragraph per line)</div>
+        <textarea class="edit-a-input">${escHtml(answerText)}</textarea>
+        <div class="edit-hint">Plain text editing. HTML formatting will be preserved in the displayed answer but simplified here.</div>
+      </div>
+      <div class="edit-field-wrap" style="display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap;">
+        <div>
+          <div class="edit-field-label">Category</div>
+          <select class="edit-cat-select">${catOptions}</select>
+        </div>
+        <div style="flex:1;min-width:160px;">
+          <div class="edit-field-label">Keywords</div>
+          <input type="text" class="edit-q-input" style="font-weight:400;font-size:0.85rem;" value="${escHtml(kw)}" placeholder="space-separated keywords">
+        </div>
+      </div>
+      <div style="display:flex;gap:10px;width:100%;margin-top:4px;">
+        <button class="btn-apply-edits" onclick="applyCardEdit(this)">✓ Apply Changes</button>
+        <button class="btn-delete-card" onclick="deleteCard(this)">✕ Delete this FAQ</button>
+      </div>
+    `;
+  }
+
+  function escHtml(str) {
+    return str.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  function applyCardEdit(btn) {
+    const ec = btn.closest('.edit-controls');
+    const card = ec.closest('.faq-card');
+    const inputs = ec.querySelectorAll('textarea, input, select');
+    const newQ = inputs[0].value.trim();
+    const newA = inputs[1].value.trim();
+    const newCat = ec.querySelector('select').value;
+    const newKw = ec.querySelectorAll('input[type=text]')[0].value.trim();
+
+    if (!newQ) { alert('Question cannot be empty.'); return; }
+
+    // Update question
+    card.querySelector('.faq-q-text').textContent = newQ;
+    // Update answer — convert plain text paragraphs to <p> tags
+    const paras = newA.split(/\n\n+/).filter(p => p.trim());
+    card.querySelector('.faq-answer').innerHTML = paras.map(p => `<p>${p.replace(/\n/g,'<br>')}</p>`).join('\n');
+    // Update attributes
+    card.setAttribute('data-cat', newCat);
+    card.setAttribute('data-keywords', newKw);
+
+    // Visual feedback
+    btn.textContent = '✓ Saved!';
+    btn.style.background = '#1a5c2e';
+    setTimeout(() => { btn.textContent = '✓ Apply Changes'; btn.style.background = ''; }, 1800);
+
+    applyFilters();
+  }
+
+  function deleteCard(btn) {
+    if (!confirm('Delete this FAQ entry? This cannot be undone until you close the file without saving.')) return;
+    btn.closest('.faq-card').remove();
+    applyFilters();
+  }
+
+  // ===== ADD FAQ =====
+  function openAddModal() {
+    document.getElementById('addFaqModal').classList.add('visible');
+    document.getElementById('newFaqQ').value = '';
+    document.getElementById('newFaqA').value = '';
+    document.getElementById('newFaqKw').value = '';
+    setTimeout(() => document.getElementById('newFaqQ').focus(), 100);
+  }
+
+  function closeAddModal() {
+    document.getElementById('addFaqModal').classList.remove('visible');
+  }
+
+  function addNewFaq() {
+    const q = document.getElementById('newFaqQ').value.trim();
+    const a = document.getElementById('newFaqA').value.trim();
+    const cat = document.getElementById('newFaqCat').value;
+    const kw = document.getElementById('newFaqKw').value.trim();
+
+    if (!q || !a) { alert('Please fill in both the question and the answer.'); return; }
+
+    const paras = a.split(/\n\n+/).filter(p => p.trim());
+    const answerHtml = paras.map(p => `<p>${escHtml(p).replace(/\n/g,'<br>')}</p>`).join('\n');
+
+    const card = document.createElement('div');
+    card.className = 'faq-card';
+    card.setAttribute('data-cat', cat);
+    card.setAttribute('data-keywords', kw);
+    card.innerHTML = `
+      <button class="faq-question" onclick="toggleCard(this)">
+        <span class="faq-q-icon">Q</span>
+        <span class="faq-q-text">${escHtml(q)}</span>
+        <span class="faq-chevron">▼</span>
+      </button>
+      <div class="faq-answer">${answerHtml}</div>
+      <div class="edit-controls"></div>
+    `;
+
+    // Insert before the first section heading of the chosen category, or at end
+    const headings = document.querySelectorAll('.section-heading');
+    let insertBefore = null;
+    headings.forEach(h => {
+      if (h.getAttribute('data-cat') === cat) insertBefore = h;
+    });
+
+    if (insertBefore) {
+      // Find last card of that category and insert after it
+      const catCards = [...document.querySelectorAll(`.faq-card[data-cat="${cat}"]`)];
+      if (catCards.length > 0) {
+        catCards[catCards.length-1].after(card);
+      } else {
+        insertBefore.after(card);
+      }
+    } else {
+      document.getElementById('faqContainer').appendChild(card);
+    }
+
+    buildEditControls(card);
+    closeAddModal();
+    applyFilters();
+
+    // Open and scroll to it
+    setTimeout(() => {
+      card.classList.add('open');
+      card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 100);
+  }
+
+  // ===== SAVE & DOWNLOAD =====
+  function saveAndDownload() {
+    // Lock before saving so the file opens in read-only mode
+    lockEditMode();
+
+    // Sync any open edit control values back before saving
+    document.querySelectorAll('.faq-card').forEach(card => {
+      const ec = card.querySelector('.edit-controls');
+      if (ec) ec.innerHTML = '';
+    });
+
+    // Remove edit mode classes from body for the saved copy
+    const html = '<!DOCTYPE html>\n' + document.documentElement.outerHTML;
+
+    // Re-strip edit-mode class and edit banner visible state if present in the saved copy
+    const cleanHtml = html
+      .replace('', '')
+      .replace('class="edit-banner"', 'class="edit-banner"');
+
+    const blob = new Blob([cleanHtml], { type: 'text/html' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'hermes-faq.html';
+    a.click();
+    URL.revokeObjectURL(url);
+
+    // Rebuild edit controls after clearing
+    document.querySelectorAll('.faq-card').forEach(card => {
+      const ec = card.querySelector('.edit-controls');
+      if (ec) buildEditControls(card);
+    });
+  }
+
+  // ===== NORMAL FAQ FUNCTIONS =====
+  function toggleCard(btn) {
+    const card = btn.closest('.faq-card');
+    const isOpen = card.classList.contains('open');
+    document.querySelectorAll('.faq-card.open').forEach(c => c.classList.remove('open'));
+    if (!isOpen) card.classList.add('open');
+  }
+
+  function filterTab(cat, btn) {
+    activeTab = cat;
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters();
+  }
+
+  function filterFAQs() { applyFilters(); }
+
+  function applyFilters() {
+    const query = document.getElementById('searchInput').value.toLowerCase().trim();
+    const cards = document.querySelectorAll('.faq-card');
+    const headings = document.querySelectorAll('.section-heading');
+    let visibleCount = 0;
+
+    cards.forEach(card => {
+      const cat = card.getAttribute('data-cat');
+      const keywords = card.getAttribute('data-keywords') || '';
+      const qText = card.querySelector('.faq-q-text').textContent.toLowerCase();
+      const aText = card.querySelector('.faq-answer').textContent.toLowerCase();
+      const tabMatch = activeTab === 'all' || cat === activeTab;
+      const searchMatch = !query || qText.includes(query) || keywords.includes(query) || aText.includes(query);
+      if (tabMatch && searchMatch) { card.classList.remove('hidden'); visibleCount++; }
+      else { card.classList.add('hidden'); card.classList.remove('open'); }
+    });
+
+    headings.forEach(heading => {
+      const cat = heading.getAttribute('data-cat');
+      const sectionCards = document.querySelectorAll(`.faq-card[data-cat="${cat}"]`);
+      const anyVisible = [...sectionCards].some(c => !c.classList.contains('hidden'));
+      heading.style.display = (activeTab === 'all' || cat === activeTab) && anyVisible ? 'flex' : 'none';
+    });
+
+    const countEl = document.getElementById('resultsCount');
+    if (query) {
+      countEl.textContent = `${visibleCount} result${visibleCount !== 1 ? 's' : ''} for "${document.getElementById('searchInput').value}"`;
+    } else { countEl.textContent = ''; }
+    document.getElementById('noResults').style.display = visibleCount === 0 ? 'block' : 'none';
+  }
+
+  // ===== VERSION CHECK =====
+  const FAQ_VERSION = '1.0';
+  const VERSION_URL = 'https://warwickshirefreemasons.org.uk/FAQvers';
+
+  function compareVersions(a, b) {
+    const pa = a.trim().split('.').map(Number);
+    const pb = b.trim().split('.').map(Number);
+    for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
+      const na = pa[i] || 0, nb = pb[i] || 0;
+      if (na < nb) return -1;
+      if (na > nb) return 1;
+    }
+    return 0;
+  }
+
+  function showVersionBanner(state, remoteVer) {
+    const banner = document.getElementById('versionBanner');
+    const text   = document.getElementById('versionText');
+    const icon   = banner.querySelector('.ver-icon');
+    banner.classList.remove('ver-ok', 'ver-old', 'ver-unknown');
+    banner.classList.add('visible');
+    if (state === 'ok') {
+      banner.classList.add('ver-ok');
+      icon.textContent = '✔';
+      text.textContent = 'Version ' + FAQ_VERSION + ' — Up to date';
+    } else if (state === 'old') {
+      banner.classList.add('ver-old');
+      icon.textContent = '⚠';
+      text.textContent = 'Version ' + FAQ_VERSION + ' — Out of date (latest: ' + remoteVer + '). Please download the new version.';
+    } else {
+      banner.classList.add('ver-unknown');
+      icon.textContent = 'ℹ';
+      text.textContent = 'Version ' + FAQ_VERSION + ' — Unable to check version';
+    }
+  }
+
+  async function checkVersion() {
+    try {
+      const resp = await fetch(VERSION_URL, { cache: 'no-cache' });
+      if (!resp.ok) { showVersionBanner('unknown'); return; }
+      const remote = (await resp.text()).trim();
+      if (!remote || !/^[\d.]+$/.test(remote)) { showVersionBanner('unknown'); return; }
+      showVersionBanner(compareVersions(FAQ_VERSION, remote) >= 0 ? 'ok' : 'old', remote);
+    } catch (e) {
+      showVersionBanner('unknown');
+    }
+  }
+
+  checkVersion();
+  applyFilters();
+</script>
+
+
+</body></html>
