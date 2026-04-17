@@ -1,5 +1,7 @@
 # FAQers
 Hermes FAQs
+
+-----------------HOW TO UPDATE--------------------------
 🔄 7. Updating your HTML (super easy)
 
 Whenever you want to change it:
