@@ -101,8 +101,7 @@
   /* Version banner */
   .version-banner {
     display: none; padding: 9px 24px; font-size: 0.84rem; font-weight: 500;
-    text-align: center; align-items: center; justify-content: center;
-    gap: 8px; letter-spacing: 0.01em;
+    text-align: center; align-items: center; justify-content: center; gap: 8px;
   }
   .version-banner.visible { display: flex; }
   .version-banner.ver-ok      { background: #eaf4ee; color: #1a5c2e; border-bottom: 1px solid #b8dfc5; }
@@ -536,14 +535,10 @@
 </main>
 
 <footer>
-  Warwickshire Province — Hermes FAQ &nbsp;|&nbsp; <span id="faq-version" style="display:none">1.0</span>v<span id="faq-version-display">1.0</span> &nbsp;|&nbsp; <span>For Secretaries &amp; Scribes E</span>
+  Warwickshire Province — Hermes FAQ &nbsp;|&nbsp; <span id="faq-version" style="display:none">1.0</span>v<span>1.0</span> &nbsp;|&nbsp; <span>For Secretaries &amp; Scribes E</span>
 </footer>
 
 <script>
-  // VERSION: This file serves as both the distributed copy and the hosted master.
-  // The authoritative version number lives in <span id="faq-version"> in the footer.
-  // Any downloaded copy fetches the hosted page, reads that span, and compares.
-
   const FAQ_VERSION = '1.0';
   const HOSTED_URL  = 'https://warwickspgl.github.io/FAQers/';
 
@@ -552,8 +547,7 @@
     const pb = String(b).trim().split('.').map(Number);
     for (let i = 0; i < Math.max(pa.length, pb.length); i++) {
       const na = pa[i] || 0, nb = pb[i] || 0;
-      if (na < nb) return -1;
-      if (na > nb) return 1;
+      if (na < nb) return -1; if (na > nb) return 1;
     }
     return 0;
   }
@@ -595,7 +589,6 @@
 
   checkVersion();
 
-  // ===== FAQ FUNCTIONS =====
   let activeTab = 'all';
 
   function toggleCard(btn) {
@@ -619,7 +612,6 @@
     const cards = document.querySelectorAll('.faq-card');
     const headings = document.querySelectorAll('.section-heading');
     let visibleCount = 0;
-
     cards.forEach(card => {
       const cat = card.getAttribute('data-cat');
       const keywords = card.getAttribute('data-keywords') || '';
@@ -630,14 +622,12 @@
       if (tabMatch && searchMatch) { card.classList.remove('hidden'); visibleCount++; }
       else { card.classList.add('hidden'); card.classList.remove('open'); }
     });
-
     headings.forEach(heading => {
       const cat = heading.getAttribute('data-cat');
-      const sectionCards = document.querySelectorAll(`.faq-card[data-cat="${cat}"]`);
+      const sectionCards = document.querySelectorAll('.faq-card[data-cat="' + cat + '"]');
       const anyVisible = [...sectionCards].some(c => !c.classList.contains('hidden'));
       heading.style.display = (activeTab === 'all' || cat === activeTab) && anyVisible ? 'flex' : 'none';
     });
-
     const countEl = document.getElementById('resultsCount');
     if (query) {
       countEl.textContent = visibleCount + ' result' + (visibleCount !== 1 ? 's' : '') + ' for "' + document.getElementById('searchInput').value + '"';
