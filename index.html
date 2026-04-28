@@ -565,7 +565,13 @@
     } else if (state === 'old') {
       banner.classList.add('ver-old');
       icon.textContent = '⚠';
-      text.textContent = 'Version ' + FAQ_VERSION + ' — Out of date (latest: ' + remoteVer + '). Please download the new version from the website.';
+      text.textContent = 'Version ' + FAQ_VERSION + ' \u2014 Out of date (latest: ' + remoteVer + ').';
+      const dlBtn = document.createElement('a');
+      dlBtn.href = HOSTED_URL;
+      dlBtn.download = 'hermes-faq.html';
+      dlBtn.textContent = '\u2b07 Download latest version';
+      dlBtn.style.cssText = 'margin-left:12px;background:#7a4a00;color:#fff8ee;padding:5px 16px;border-radius:5px;text-decoration:none;font-size:0.82rem;font-weight:700;white-space:nowrap;border:1px solid #a06000;';
+      text.after(dlBtn);
     } else {
       banner.classList.add('ver-unknown');
       icon.textContent = 'ℹ';
